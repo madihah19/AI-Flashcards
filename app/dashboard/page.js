@@ -15,60 +15,7 @@ const Dashboard = () => {
       </Typography>
       <SignOutButton />
 
-      <Grid container spacing={4}>
-        <Grid item xs={12} md={8}>
-          <Box 
-            sx={{ 
-              p: 3, 
-              bgcolor: '#f5f5f5', 
-              borderRadius: 2, 
-              boxShadow: 2,
-              height: 'auto' // Ensures the grid item adapts to its content
-            }}
-          >
-            <Typography>Content for xs=8</Typography>
-          </Box>
-        </Grid>
-        <Grid item xs={12} md={4}>
-          <Box 
-            sx={{ 
-              p: 3, 
-              bgcolor: '#f5f5f5', 
-              borderRadius: 2, 
-              boxShadow: 2,
-              height: 'auto' // Ensures the grid item adapts to its content
-            }}
-          >
-            <Typography>Content for xs=4</Typography>
-          </Box>
-        </Grid>
-        <Grid item xs={12} md={4}>
-          <Box 
-            sx={{ 
-              p: 3, 
-              bgcolor: '#f5f5f5', 
-              borderRadius: 2, 
-              boxShadow: 2,
-              height: 'auto' // Ensures the grid item adapts to its content
-            }}
-          >
-            <Typography>Content for xs=4</Typography>
-          </Box>
-        </Grid>
-        <Grid item xs={12} md={8}>
-          <Box 
-            sx={{ 
-              p: 3, 
-              bgcolor: '#f5f5f5', 
-              borderRadius: 2, 
-              boxShadow: 2,
-              height: 'auto' // Ensures the grid item adapts to its content
-            }}
-          >
-            <Typography>Content for xs=8</Typography>
-          </Box>
-        </Grid>
-      </Grid>
+     
     </Box>
   );
 };
