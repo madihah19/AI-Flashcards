@@ -1,0 +1,66 @@
+.main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: url('./backgrounds/pexels-pixabay-531767.jpg') no-repeat center center fixed;
+  background-size: cover; /* Ensure the image covers the entire background */
+  position: relative; /* Ensure the card is positioned correctly */
+  overflow: hidden; /* Prevent scrollbars from appearing due to the image */
+}
+
+.card {
+  background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent background for the card */
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  max-width: 800px;
+  text-align: center;
+  position: relative; /* Ensure the card appears on top of the background */
+  z-index: 1; /* Place the card above the background */
+}
+
+.title {
+  font-size: 4rem;
+  font-weight: bold;
+  color: #4a4a4a;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  color: #7a7a7a;
+  margin-bottom: 2rem;
+}
+
+.getStartedButton {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #5163ba;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.getStartedButton:hover {
+  background-color: #3d4a8e;
+}
+
+.loginPrompt {
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  color: #7a7a7a;
+}
+
+.loginLink {
+  color: #5163ba;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.loginLink:hover {
+  text-decoration: underline;
+}

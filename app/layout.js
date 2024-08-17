@@ -2,6 +2,7 @@
 
 import { Inter, Libre_Baskerville } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
+import Link from "next/link";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -33,18 +34,40 @@ export default function RootLayout({ children }) {
                   textAlign: "center",
                   fontSize: "0.85rem",
                   color: "#fff",
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
                 }}
               >
-                <p>
-                  <strong>👋 Welcome to your new website!</strong> To customize
-                  the code and content of this site,{" "}
-                  
-                  Remove this bar in <code>app/layout.js</code>.
-                </p>
+                <div style={{ display: "flex", gap: "1.5rem" }}>
+                  <Link href="/" style={{ color: "#fff", textDecoration: "none" }}>
+                    Home
+                  </Link>
+                  <Link href="/about-us" style={{ color: "#fff", textDecoration: "none" }}>
+                    About Us
+                  </Link>
+                  <Link href="/vision" style={{ color: "#fff", textDecoration: "none" }}>
+                    Our Vision
+                  </Link>
+                </div>
+               
+                <Link href="/sign-in">
+                  <button
+                    style={{
+                      background: "#ffffff",
+                      color: "#5163ba",
+                      padding: "0.5rem 1rem",
+                      borderRadius: "4px",
+                      border: "none",
+                      cursor: "pointer",
+                    }}
+                  >
+                    Log in
+                  </button>
+                </Link>
               </div>
             )}
             {children}
-            
           </main>
         </body>
       </html>
