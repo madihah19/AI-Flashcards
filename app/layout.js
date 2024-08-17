@@ -1,5 +1,4 @@
-// import "../styles/globals.css";
-
+//import "../styles/globals.css";
 import { Inter, Libre_Baskerville } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import Link from "next/link";
@@ -20,10 +19,7 @@ const libre_baskerville = Libre_Baskerville({
 export default function RootLayout({ children }) {
   return (
     <ClerkProvider>
-      <html
-        lang="en"
-        className={`${inter.className} ${libre_baskerville.className}`}
-      >
+      <html lang="en" className={`${inter.className} ${libre_baskerville.className}`}>
         <body className="overflow-x-hidden antialiased">
           <main>
             {process.env.NODE_ENV === "development" && (
@@ -48,6 +44,10 @@ export default function RootLayout({ children }) {
                   </Link>
                   <Link href="/vision" style={{ color: "#fff", textDecoration: "none" }}>
                     Our Vision
+                  </Link>
+                  {/* Update the href to the main page with the pricing section */}
+                  <Link href="/#pricing" style={{ color: "#fff", textDecoration: "none" }}>
+                    Pricing
                   </Link>
                 </div>
                
