@@ -13,23 +13,31 @@ import {
   CssBaseline,
   createTheme,
   Grid,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
 } from "@mui/material";
+import { doc, collection, getDoc, writeBatch } from "firebase/firestore";
+import { db } from "../../firebase"; // Adjust the path according to your project setup
+import { useRouter } from 'next/navigation';  // Import useRouter
 
 // Define the theme directly in the component
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#6200ea', // Purple
+      main: "#6200ea", // Purple
     },
     secondary: {
-      main: '#03a9f4', // Blue
+      main: "#03a9f4", // Blue
     },
     background: {
-      default: '#f5f5f5', // Light grey background for contrast
+      default: "#f5f5f5", // Light grey background for contrast
     },
     text: {
-      primary: '#333333', // Darker text for better readability
-      secondary: '#ffffff',
+      primary: "#333333", // Darker text for better readability
+      secondary: "#ffffff",
     },
   },
   typography: {
@@ -39,27 +47,27 @@ const theme = createTheme({
     MuiCard: {
       styleOverrides: {
         root: {
-          borderRadius: '12px',
-          boxShadow: '0px 8px 16px rgba(0, 0, 0, 0.1)',
-          padding: '1rem',
-          position: 'relative',
-          overflow: 'hidden',
-          backgroundColor: 'rgba(255, 255, 255, 0.8)', // Translucent white background
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          textAlign: 'center',
-          aspectRatio: '9 / 12', // Portrait orientation
-          width: '200px', // Fixed width
-          maxWidth: '100%',
-          cursor: 'pointer', // Indicate that the card is clickable
+          borderRadius: "12px",
+          boxShadow: "0px 8px 16px rgba(0, 0, 0, 0.1)",
+          padding: "1rem",
+          position: "relative",
+          overflow: "hidden",
+          backgroundColor: "rgba(255, 255, 255, 0.8)", // Translucent white background
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          textAlign: "center",
+          aspectRatio: "9 / 12", // Portrait orientation
+          width: "200px", // Fixed width
+          maxWidth: "100%",
+          cursor: "pointer", // Indicate that the card is clickable
         },
       },
     },
     MuiButton: {
       styleOverrides: {
         root: {
-          borderRadius: '8px',
+          borderRadius: "8px",
         },
       },
     },
@@ -70,6 +78,10 @@ export default function Home() {
   const [message, setMessage] = useState("");
   const [flashcards, setFlashcards] = useState([]);
   const [revealedCards, setRevealedCards] = useState({});
+  const [setName, setSetName] = useState('');
+  const [dialogOpen, setDialogOpen] = useState(false);
+
+  const router = useRouter();  // Initialize router
 
   const fetchFlashcards = async () => {
     if (message.trim() === "") return;
@@ -144,6 +156,47 @@ export default function Home() {
     setMessage(""); // Clear the input after sending
   };
 
+  const handleOpenDialog = () => setDialogOpen(true);
+  const handleCloseDialog = () => setDialogOpen(false);
+
+  const saveFlashcards = async () => {
+    if (!setName.trim()) {
+      alert('Please enter a name for your flashcard set.');
+      return;
+    }
+
+    try {
+      const userDocRef = doc(collection(db, 'users'), 'user-id'); // Replace 'user-id' with actual user ID
+      const userDocSnap = await getDoc(userDocRef);
+
+      const batch = writeBatch(db);
+
+      if (userDocSnap.exists()) {
+        const userData = userDocSnap.data();
+        const updatedSets = [...(userData.flashcardSets || []), { name: setName }];
+        batch.update(userDocRef, { flashcardSets: updatedSets });
+      } else {
+        batch.set(userDocRef, { flashcardSets: [{ name: setName }] });
+      }
+
+      const setDocRef = doc(collection(userDocRef, 'flashcardSets'), setName);
+      batch.set(setDocRef, { flashcards });
+
+      await batch.commit();
+
+      alert('Flashcards saved successfully!');
+      handleCloseDialog();
+      setSetName('');
+
+      // Navigate to the flashcards page after saving
+      router.push('/flashcards');  // Adjust this path according to where your flashcards page is located
+
+    } catch (error) {
+      console.error('Error saving flashcards:', error);
+      alert('An error occurred while saving flashcards. Please try again.');
+    }
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -181,30 +234,35 @@ export default function Home() {
               </Button>
             </Stack>
             <Box>
-              <Typography variant="h6" sx={{ marginBottom: 2, fontFamily: '"Arial", sans-serif',fontWeight: 'bold', fontSize: '1.2rem',}}>Generated Flashcards:</Typography>
+              <Typography variant="h6" sx={{ marginBottom: 2, fontFamily: '"Arial", sans-serif', fontWeight: 'bold', fontSize: '1.2rem', }}>Generated Flashcards:</Typography>
               {flashcards.length > 0 ? (
-                <Grid container spacing={2} justifyContent="center">
-                  {flashcards.map((card, index) => (
-                    <Grid item key={index}>
-                      <Card onClick={() => handleCardClick(index)}>
-                        <CardContent sx={{ textAlign: 'center' }}>
-                          {/* Only show question if answer is not revealed */}
-                          {!revealedCards[index] && (
-                            <Typography variant="h6" sx={{ marginBottom: 1, color: theme.palette.primary.main }}>
-                              {card.question}
-                            </Typography>
-                          )}
-                          {/* Only show answer if revealed */}
-                          {revealedCards[index] && (
-                            <Typography variant="body1" sx={{ marginTop: 2 }}>
-                              {card.answer}
-                            </Typography>
-                          )}
-                        </CardContent>
-                      </Card>
-                    </Grid>
-                  ))}
-                </Grid>
+                <>
+                  <Grid container spacing={2} justifyContent="center">
+                    {flashcards.map((card, index) => (
+                      <Grid item key={index}>
+                        <Card onClick={() => handleCardClick(index)}>
+                          <CardContent sx={{ textAlign: 'center' }}>
+                            {!revealedCards[index] && (
+                              <Typography variant="h6" sx={{ marginBottom: 1, color: theme.palette.primary.main }}>
+                                {card.question}
+                              </Typography>
+                            )}
+                            {revealedCards[index] && (
+                              <Typography variant="body1" sx={{ marginTop: 2 }}>
+                                {card.answer}
+                              </Typography>
+                            )}
+                          </CardContent>
+                        </Card>
+                      </Grid>
+                    ))}
+                  </Grid>
+                  <Box sx={{ mt: 4, display: 'flex', justifyContent: 'center' }}>
+                    <Button variant="contained" color="primary" onClick={handleOpenDialog}>
+                      Save Flashcards
+                    </Button>
+                  </Box>
+                </>
               ) : (
                 <Typography>No flashcards available.</Typography>
               )}
@@ -212,6 +270,30 @@ export default function Home() {
           </Stack>
         </Container>
       </Box>
+
+      <Dialog open={dialogOpen} onClose={handleCloseDialog}>
+        <DialogTitle>Save Flashcard Set</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Please enter a name for your flashcard set.
+          </DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            label="Set Name"
+            type="text"
+            fullWidth
+            value={setName}
+            onChange={(e) => setSetName(e.target.value)}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseDialog}>Cancel</Button>
+          <Button onClick={saveFlashcards} color="primary">
+            Save
+          </Button>
+        </DialogActions>
+      </Dialog>
     </ThemeProvider>
   );
 }
