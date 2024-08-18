@@ -13,7 +13,12 @@ import {
   CssBaseline,
   createTheme,
   Grid,
+  IconButton,
+
 } from "@mui/material";
+
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+
 
 // Define the theme directly in the component
 const theme = createTheme({
@@ -99,31 +104,28 @@ export default function Home() {
   };
 
   const parseFlashcards = (text) => {
-    // Adjusted regex pattern to capture questions and answers
     const cardPattern = /(\d+\. (.*?))\s*\*\s*Answer:\s*(.*?)(?:$|\n\n)/gs;
     const cards = [];
     let match;
 
     while ((match = cardPattern.exec(text)) !== null) {
-      // Extract the question and answer
       const rawQuestion = match[2].trim();
       const rawAnswer = match[3].trim();
 
-      // Remove leading and trailing '**', 'Question:', 'Answer:', and any '*' characters
       const question = rawQuestion
-        .replace(/^\*\*\s*/, '') // Remove leading **
-        .replace(/\s*\*\*$/, '') // Remove trailing **
-        .replace(/^\s*Question:\s*/, '') // Remove Question: prefix
-        .replace(/\s*\*$/, '') // Remove trailing *
-        .replace(/\*/g, '') // Remove all '*' characters
+        .replace(/^\*\*\s*/, '')
+        .replace(/\s*\*\*$/, '')
+        .replace(/^\s*Question:\s*/, '')
+        .replace(/\s*\*$/, '')
+        .replace(/\*/g, '')
         .trim();
 
       const answer = rawAnswer
-        .replace(/^\*\*\s*/, '') // Remove leading **
-        .replace(/\s*\*\*$/, '') // Remove trailing **
-        .replace(/^\s*Answer:\s*/, '') // Remove Answer: prefix
-        .replace(/\s*\*$/, '') // Remove trailing *
-        .replace(/\*/g, '') // Remove all '*' characters
+        .replace(/^\*\*\s*/, '')
+        .replace(/\s*\*\*$/, '')
+        .replace(/^\s*Answer:\s*/, '')
+        .replace(/\s*\*$/, '')
+        .replace(/\*/g, '')
         .trim();
 
       cards.push({ question, answer });
@@ -147,7 +149,13 @@ export default function Home() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Box sx={{ minHeight: '100vh', backgroundColor: theme.palette.background.default, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 2 }}>
+      <Box sx={{ minHeight: '100vh', backgroundColor: theme.palette.background.default, display: 'flex', flexDirection: 'column', alignItems: 'center', padding: 2 }}>
+        <IconButton
+          sx={{ position: 'absolute', top: 65, left: 16 }}
+          onClick={() => window.location.href = '/dashboard'}
+        >
+          <ArrowBackIcon />
+        </IconButton>
         <Container maxWidth="md">
           <Stack spacing={3}>
             <Typography 
@@ -155,9 +163,9 @@ export default function Home() {
               sx={{ 
                 marginBottom: 1, 
                 textAlign: 'left', 
-                fontFamily: '"Arial", sans-serif', // Change font family
-                fontWeight: 'bold', // Change font weight
-                fontSize: '1.2rem', // Change font size
+                fontFamily: '"Arial", sans-serif',
+                fontWeight: 'bold',
+                fontSize: '1.2rem'
               }}
             >
               Enter your prompt
@@ -181,20 +189,18 @@ export default function Home() {
               </Button>
             </Stack>
             <Box>
-              <Typography variant="h6" sx={{ marginBottom: 2, fontFamily: '"Arial", sans-serif',fontWeight: 'bold', fontSize: '1.2rem',}}>Generated Flashcards:</Typography>
+              <Typography variant="h6" sx={{ marginBottom: 2, fontFamily: '"Arial", sans-serif', fontWeight: 'bold', fontSize: '1.2rem' }}>Generated Flashcards:</Typography>
               {flashcards.length > 0 ? (
                 <Grid container spacing={2} justifyContent="center">
                   {flashcards.map((card, index) => (
                     <Grid item key={index}>
                       <Card onClick={() => handleCardClick(index)}>
                         <CardContent sx={{ textAlign: 'center' }}>
-                          {/* Only show question if answer is not revealed */}
                           {!revealedCards[index] && (
                             <Typography variant="h6" sx={{ marginBottom: 1, color: theme.palette.primary.main }}>
                               {card.question}
                             </Typography>
                           )}
-                          {/* Only show answer if revealed */}
                           {revealedCards[index] && (
                             <Typography variant="body1" sx={{ marginTop: 2 }}>
                               {card.answer}

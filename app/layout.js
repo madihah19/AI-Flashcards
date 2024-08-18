@@ -3,6 +3,7 @@ import { Inter, Libre_Baskerville } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
 import Link from "next/link";
 
+
 const inter = Inter({
   subsets: ["latin"],
   display: "swap",
