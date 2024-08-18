@@ -1,0 +1,195 @@
+.main {
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  align-items: center;
+  justify-content: flex-start; /* Align items to the top */
+  min-height: 100vh; /* Ensure the container takes full viewport height */
+  background: url('./backgrounds/pexels-pixabay-531767.jpg') no-repeat center center fixed;
+  background-size: cover;
+  overflow-y: auto; /* Enable vertical scrolling */
+  padding: 60px; /* Add padding for spacing */
+}
+
+.card {
+  background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent background for the card */
+  padding: 3rem; /* Increased padding for a larger container */
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  max-width: 800px; /* Increased max-width for a bigger container */
+  max-height: 600px;
+  text-align: center;
+  position: relative; /* Ensure the card appears on top of the background */
+  z-index: 1; /* Place the card above the background */
+  margin-bottom: 75px; /* Added margin-bottom to separate it from the pricing section */
+}
+
+.title {
+  font-size: 4rem;
+  font-weight: bold;
+  color: #4a4a4a;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  color: #7a7a7a;
+  margin-bottom: 2rem;
+}
+
+.getStartedButton {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #5163ba;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.getStartedButton:hover {
+  background-color: #3d4a8e;
+}
+
+.loginPrompt {
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  color: #7a7a7a;
+}
+
+.loginLink {
+  color: #5163ba;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.loginLink:hover {
+  text-decoration: underline;
+}
+
+.pricingSection {
+  width: 100%;
+  max-width: 1200px; /* Adjust as needed */
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+  margin-top: 60px; /* Added margin-top to move it down */
+}
+
+.pricingTitle {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.pricingGrid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px; /* Increased gap for more spacing between containers */
+}
+
+.pricingCard {
+  background: #f5f5f5;
+  border-radius: 8px;
+  padding: 20px;
+  width: 300px; /* Fixed width for better control */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s;
+  box-sizing: border-box; /* Ensure padding is included in width */
+}
+
+.pricingCard:hover {
+  transform: scale(1.05);
+}
+
+.pricingPlanTitle {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.pricingPlanPrice {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.pricingPlanDescription {
+  margin-bottom: 1.5rem;
+}
+
+.pricingButton {
+  display: inline-block;
+  background: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+
+.featuresSection {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px 20px;
+  text-align: center;
+  background: linear-gradient(135deg, #d8dde6, #f0f4f8); /* Gradient background */
+  border-radius: 15px; /* Rounded corners */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  margin-top: 200px;
+  margin-bottom: 200px;
+}
+
+.featureTitle {
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  color: #333;
+  
+  font-weight: 700;
+}
+
+.featureGrid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+.featureCard {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 25px;
+  width: 280px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  margin-bottom: 200px;
+}
+
+.featureCard:hover {
+  transform: translateY(-10px); /* Lift on hover */
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15); /* Deeper shadow on hover */
+}
+
+.featurePlanTitle {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+  color: #444;
+  
+}
+
+.featurePlanPrice {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #5163ba;
+  font-weight: bold;
+}
+
+.featurePlanDescription {
+  font-size: 1rem;
+  color: #666;
+  line-height: 1.6;
+}
