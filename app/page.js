@@ -9,16 +9,16 @@ export default function Home() {
       <div className={styles.card}>
         <h1 className={styles.title}>DrawCards</h1>
         <p className={styles.subtitle}>Revolutionize learning one card at a time.</p>
-        <a href="/promptgen" className={styles.getStartedButton}>
-          Start your journey
+        <a href="/sign-up" className={styles.getStartedButton}>
+          Join us
         </a>
         <div className={styles.loginPrompt}>
-          <p>Not a member? <Link href="/sign-in" className={styles.loginLink}>click here</Link></p>
+          <p>Already a member? <Link href="/sign-in" className={styles.loginLink}>click here</Link></p>
         </div>
       </div>
 
   <div id="Features" className={styles.featuresSection}>
-  <h2 className={styles.featureTitle}>Features</h2>
+  <h2 className={styles.featureTitle}>Why us?</h2>
   <div className={styles.featureGrid}>
     <div className={styles.featureCard}>
     <h3 className={styles.featurePlanTitle}> 1 </h3>
@@ -36,9 +36,9 @@ export default function Home() {
     </div>
 
     <div className={styles.featureCard}>
-      <h3 className={styles.featurePlanTitle}>Pro</h3>
-      <p className={styles.featurePlanPrice}>$20</p>
-      <p className={styles.featurePlanDescription}>Ideal for professionals needing advanced features</p>
+      <h3 className={styles.featurePlanTitle}> 3 </h3>
+      <p className={styles.featurePlanPrice}>Flexibility</p>
+      <p className={styles.featurePlanDescription}>Various pricing plans, inclusive of all users</p>
     </div>
   </div>
 </div>
@@ -53,7 +53,7 @@ export default function Home() {
             <h3 className={styles.pricingPlanTitle}>Free</h3>
             <p className={styles.pricingPlanPrice}>Free</p>
             <p className={styles.pricingPlanDescription}>Generation of cards up to 10 prompts</p>
-            <a href="/signup" className={styles.pricingButton}>Get Started</a>
+            <a href="/sign-up" className={styles.pricingButton}>Get Started</a>
           </div>
 
           {/* Hobbyist Plan */}
@@ -61,7 +61,7 @@ export default function Home() {
             <h3 className={styles.pricingPlanTitle}>Hobbyist</h3>
             <p className={styles.pricingPlanPrice}>$8</p>
             <p className={styles.pricingPlanDescription}>Perfect for students and exam aspirants</p>
-            <a href="/signup" className={styles.pricingButton}>Get Started</a>
+            <a href="/sign-up" className={styles.pricingButton}>Get Started</a>
           </div>
 
           {/* Pro Plan */}
@@ -69,7 +69,7 @@ export default function Home() {
             <h3 className={styles.pricingPlanTitle}>Pro</h3>
             <p className={styles.pricingPlanPrice}>$20</p>
             <p className={styles.pricingPlanDescription}>Ideal for professionals needing advanced features</p>
-            <a href="/signup" className={styles.pricingButton}>Get Started</a>
+            <a href="/sign-up" className={styles.pricingButton}>Get Started</a>
           </div>
         </div>
       </div>

@@ -1,10 +1,11 @@
 'use client'
-
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { doc, getDoc } from 'firebase/firestore'
 import { db } from '@/firebase'
 import { useRouter } from 'next/navigation'
-import { Container, Grid, Card, CardActionArea, CardContent, Typography, CircularProgress, Box } from '@mui/material'
+import { Container, Grid, Card, CardActionArea, CardContent, Typography, CircularProgress, Box, IconButton } from '@mui/material'
+import ArrowBackIcon from '@mui/icons-material/ArrowBack'
+
 
 export default function Flashcards() {
   const [flashcardSets, setFlashcardSets] = useState([])
@@ -15,6 +16,10 @@ export default function Flashcards() {
 
   const handleCardClick = (index) => {
     router.push(`/flashcard?id=${index}`)
+  }
+
+  const handleGoBack = () => {
+    router.push('/promptgen')
   }
 
   useEffect(() => {
@@ -51,7 +56,12 @@ export default function Flashcards() {
 
   return (
     <Container maxWidth="md">
-      <Grid container spacing={3} sx={{ mt: 4 }}>
+      <Box sx={{ mb: 4 }}>
+        <IconButton onClick={handleGoBack} sx={{ position: 'relative', top: 8 }}>
+          <ArrowBackIcon />
+        </IconButton>
+      </Box>
+      <Grid container spacing={3}>
         {flashcardSets.length > 0 ? (
           flashcardSets.map((flashcardSet, index) => (
             <Grid item xs={12} sm={6} md={4} key={index}>

@@ -1,4 +1,8 @@
 "use client";
+
+import IconButton from '@mui/material/IconButton';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+
 import React, { useState } from "react";
 import {
   Box,
@@ -203,6 +207,11 @@ export default function Home() {
       <Box sx={{ minHeight: '100vh', backgroundColor: theme.palette.background.default, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 2 }}>
         <Container maxWidth="md">
           <Stack spacing={3}>
+            <Box sx={{ mb: 2 }}>
+              <IconButton onClick={() => router.push('/dashboard')} sx={{ position: 'absolute', top: 65, left: 16 }}>
+                <ArrowBackIcon />
+              </IconButton>
+            </Box>
             <Typography 
               variant="h6" 
               sx={{ 
