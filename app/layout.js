@@ -42,8 +42,8 @@ export default function RootLayout({ children }) {
                   <Link href="/about-us" style={{ color: "#fff", textDecoration: "none" }}>
                     About Us
                   </Link>
-                  <Link href="/vision" style={{ color: "#fff", textDecoration: "none" }}>
-                    Our Vision
+                  <Link href="/#Features" style={{ color: "#fff", textDecoration: "none" }}>
+                  Why us?
                   </Link>
                   {/* Update the href to the main page with the pricing section */}
                   <Link href="/#pricing" style={{ color: "#fff", textDecoration: "none" }}>
